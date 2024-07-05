@@ -11,8 +11,14 @@ interface Route {
   id: string; // Sesuaikan dengan tipe id yang digunakan di Firestore
   namaStasiun: string;
   nomerPlatform: string;
+  peran : any;
 }
-
+interface User {
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+  peran?: string | null | undefined;
+}
 const StasiunPage = () => {
   const router = useRouter();
   const [routes, setRoutes] = useState<Route[]>([]);
@@ -21,7 +27,6 @@ const StasiunPage = () => {
   const { data: session, status } = useSession({
     required: false,
   });
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -105,7 +110,7 @@ const StasiunPage = () => {
                       <td className="border p-1 text-center">
                         {route.nomerPlatform}
                       </td>
-                      {session && (
+                      {session?.user?.email === 'admin@gmail.com' && (
                         <td className="border p-2">
                           <button
                             onClick={() => handleEdit(route.id)}
@@ -121,7 +126,7 @@ const StasiunPage = () => {
                 </tbody>
               )}
             </table>
-            {session ? (
+            {session?.user?.email === 'admin@gmail.com' ? (
               <button
                 onClick={handleAdd}
                 type="submit"

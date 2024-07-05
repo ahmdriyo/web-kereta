@@ -119,7 +119,7 @@ const Rute = () => {
                       {route.waktuTiba}
                     </td>
                     <td className="border p-2">{route.namaStasiunDestinasi}</td>
-                    {session && (
+                    {session?.user?.email === 'admin@gmail.com' && (
                       <td className="border p-2">
                         <button
                           onClick={() => handleEdit(route.id)}
@@ -136,7 +136,7 @@ const Rute = () => {
               )}
               
             </table>
-            {session && (
+            {session?.user?.email === 'admin@gmail.com' && (
               <button
                 onClick={handelAdd}
                 type="submit"

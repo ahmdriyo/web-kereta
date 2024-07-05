@@ -4,6 +4,7 @@ import admin from "../asset/admin.jpg";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +23,7 @@ const Login = () => {
       <div className="flex items-center justify-center h-full">
         <div className="w-[430px] h-[320px] bg-[#000000] text-white bg-opacity-30 backdrop-filter backdrop-blur-sm p-6 rounded-2xl shadow-md">
           <div className="flex items-center justify-center">
-            <h3 className="text-2xl font-bold mb-4">Admin Login</h3>
+            <h3 className="text-2xl font-bold mb-4">Login Penumpang</h3>
           </div>
           <div className="space-y-4">
             
@@ -79,7 +80,9 @@ const Login = () => {
               >
                 Masuk
               </button>
-              
+              <Link href="/registerPenumpang" className="text-sm text-white hover:underline cursor-pointer">
+                Belum punya akun ? <a>Daftar di sini</a>
+              </Link>
             </div>
           </div>
         </div>

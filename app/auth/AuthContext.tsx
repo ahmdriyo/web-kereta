@@ -1,17 +1,13 @@
 "use client"
-
 import React, { createContext, useState, useEffect, useContext, ReactNode } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { auth, firestore } from "../../firebaseConfig"; // Pastikan untuk mengimpor objek autentikasi Firebase Anda
+import { auth, firestore } from "../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-
 interface AuthContextType {
   currentUser: User | null;
   peran: string | null;
 }
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -19,16 +15,13 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
-
 interface AuthProviderProps {
   children: ReactNode;
 }
-
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [peran, setPeran] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setLoading(true);
@@ -50,7 +43,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
     return () => unsubscribe();
   }, []);
-
   return (
     <AuthContext.Provider value={{ currentUser, peran }}>
       {!loading && children}
