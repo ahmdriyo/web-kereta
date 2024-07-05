@@ -38,6 +38,9 @@ export default function Home(){
           <p className="text-lg text-white">
             Temukan Rute Terbaik, Nikmati Perjalanan Tanpa Batas!
           </p>
+          <p className="text-md text-white">
+            Silahkan login sebagai Penumpang atau admin terlebih dahulu <br/> untuk akses web secara penuh!
+          </p>
         </div>
       </div>
     </div>
