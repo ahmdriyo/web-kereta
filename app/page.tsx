@@ -39,7 +39,7 @@ export default function Home(){
             Temukan Rute Terbaik, Nikmati Perjalanan Tanpa Batas!
           </p>
           <p>NOTE*</p>
-          <p className="text-md text-[#b0eac7]">
+          <p className="text-sm font-light text-[#b0eac7]">
             Silahkan login sebagai Penumpang atau admin terlebih dahulu <br/> untuk akses web secara penuh!
           </p>
         </div>
