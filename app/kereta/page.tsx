@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import kereta from "../asset/kereta.jpg";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../firebaseConfig";
 import { useSession } from "next-auth/react";
@@ -20,7 +20,10 @@ const Kereta = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { data: session, status } = useSession({
-    required: false,
+    required: true,
+      onUnauthenticated() {
+      redirect('/loginPenumpang');
+    },
   });
   const handelAdd = () => {
     router.push("/kereta/addKereta");
