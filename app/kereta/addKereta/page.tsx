@@ -11,7 +11,6 @@ const AddKereta = () => {
     namaKereta: "",
     kelas: "",
     destinasi: "",
-    namaStasiunDestinasi: "",
   });
   const handleSubmit = async (event) => {
     event.preventDefault();
