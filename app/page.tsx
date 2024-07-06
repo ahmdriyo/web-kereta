@@ -27,15 +27,15 @@ export default function Home(){
         <div className='text-white'>{user?.alamat }</div>
         <div className='text-white'>{user?.noTelpon }</div>
         <button className='text-white' onClick={() => signOut()}>Logout</button> */}
-          <p className="text-[30px] font-bold mb-[30px]">
+          <p className="xl:text-[30px] font-bold xl:mb-[30px] mb-2 text-[20px]">
             Selamat datang di platform kami yang menyediakan informasi lengkap
             mengenai rute perjalanan, stasiun, dan kereta api cepat.
           </p>
-          <p className="text-xl font-bold xl:w-[80%] text-white  pb-2 border-b-4">
+          <p className="xl:text-xl font-bold xl:w-[80%] text-white text-sm pb-2 border-b-4">
             Temukan dengan mudah dan cepat destinasi favorit Anda, serta nikmati
             pengalaman perjalanan yang efisien dan terhubung di seluruh negeri.
           </p>
-          <p className="text-lg text-white">
+          <p className="xl:text-lg text:sm text-white">
             Temukan Rute Terbaik, Nikmati Perjalanan Tanpa Batas!
           </p>
           <p>NOTE*</p>

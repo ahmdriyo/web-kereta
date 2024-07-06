@@ -53,7 +53,7 @@ const Register = () => {
       style={{ backgroundImage: `url(${admin.src})` }}
     >
       <div className="flex items-center justify-center h-full">
-        <div className="w-[430px] h-[630px] bg-[#000000] text-white bg-opacity-30 backdrop-filter backdrop-blur-sm p-6 rounded-2xl shadow-md">
+        <div className="w-[430px] h-[630px] bg-[#000000] text-white m-2 bg-opacity-30 backdrop-filter backdrop-blur-sm p-6 rounded-2xl shadow-md">
           <div className="flex items-center justify-center">
             <h3 className="text-2xl font-bold mb-4">Register Penumpang</h3>
           </div>

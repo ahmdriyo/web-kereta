@@ -2,8 +2,11 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { TiThMenu } from "react-icons/ti";
-import { FaRegWindowClose } from "react-icons/fa";
+import { FaRegWindowClose, FaUser } from "react-icons/fa";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { RiAdminFill } from "react-icons/ri";
+import { IoLogIn, IoLogOut } from "react-icons/io5";
 const links = [
   {
     name: "Home",
@@ -24,8 +27,12 @@ const links = [
 ];
 
 const MobileNav = () => {
+  const { data: session, status } = useSession({
+    required: false,
+  });
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenTogel, setIsOpenTogel] = useState(false);
 
   const handleClick = () => {
     setIsOpen(true);
@@ -37,7 +44,12 @@ const MobileNav = () => {
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
-
+  const toggleDropdown = () => {
+    setIsOpenTogel(!isOpenTogel);
+  };
+  const handleItemClick = () => {
+    setIsOpenTogel(false);
+  };
   return (
     <>
       {isOpen ? (
@@ -71,6 +83,55 @@ const MobileNav = () => {
               </Link>
             ))}
           </nav>
+          {session ? (
+            <>
+              <div
+                className="cursor-pointer mt-5 flex flex-row items-center justify-center"
+                onClick={() => signOut()}
+              >
+                <p className="mr-1">Logout</p>
+                <IoLogOut size={23} />
+              </div>
+            </>
+          ) : (
+            <div className="flex justify-center">
+              <button
+                onClick={toggleDropdown}
+                className="flex flex-row items-center mt-5"
+              >
+                <IoLogIn />
+                <p className="ml-1">Login</p>
+              </button>
+              {isOpenTogel && (
+                <div className="absolute right-[15%] mt-14 w-44 bg-[#000000] border rounded shadow-lg z-20">
+                  <Link
+                    href="/loginAdmin"
+                    className="w-[174px] px-2 py-2 text-white flex flex-row items-center rounded hover:bg-[#242222]"
+                  >
+                    <div
+                      onClick={handleItemClick}
+                      className="flex flex-row items-center"
+                    >
+                      <RiAdminFill className=" mr-2" />
+                      Login Admin
+                    </div>
+                  </Link>
+                  <Link
+                    href="/loginPenumpang"
+                    className="flex flex-row items-center px-2 py-2 w-[174px] text-white rounded hover:bg-[#242222]"
+                  >
+                    <div
+                      onClick={handleItemClick}
+                      className="flex flex-row items-center"
+                    >
+                      <FaUser className=" mr-2" />
+                      Login Penumpang
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </>

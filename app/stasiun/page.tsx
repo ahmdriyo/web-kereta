@@ -68,7 +68,7 @@ const StasiunPage = () => {
     >
       <div className="flex items-center justify-center h-full">
         <div className="max-w-4xl mx-auto mt-10">
-          <div className="bg-[#eedef8] bg-opacity-75 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md">
+          <div className="bg-[#eedef8] m-2 bg-opacity-75 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md">
             <h2 className="text-2xl mb-4 font-bold">Daftar Stasiun</h2>
             <div className="flex mb-4">
               <input

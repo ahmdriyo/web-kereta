@@ -1,24 +1,59 @@
-'use client'
+'use client';
 import rute from "../../asset/rute.jpg";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
-import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { addDoc, collection, query, where, getDocs, getDoc, doc } from "firebase/firestore";
 import { firestore } from "../../../firebaseConfig";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+
+// type Stasiun = {
+//   id_stasiun: string;
+//   namaStasiun: string;
+//   nomerPlatform: string;
+// };
+// type Kereta = {
+//   id_kereta: string,
+//   namaKereta: string,
+//   kelas: string,
+//   destinasi: string,
+// }
+
 
 const AddRute = () => {
   const router = useRouter();
   const [addData, setAddData] = useState({
     id_rute: "",
+    namaKereta: "",
     berangkat: "",
     waktuBerangkat: "",
     waktuTiba: "",
     namaStasiunDestinasi: "",
   });
 
+  const [keretaList, setKeretaList] = useState<string[]>([]);
+  const [stasiunList, setStasiunList] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchKeretaData = async () => {
+      const querySnapshot = await getDocs(collection(firestore, "dataKereta"));
+      const keretaData = querySnapshot.docs.map(doc => doc.data().namaKereta as string);
+      setKeretaList(keretaData);
+    };
+
+    const fetchStasiunData = async () => {
+      const querySnapshot = await getDocs(collection(firestore, "dataStasiun"));
+      const stasiunData = querySnapshot.docs.map(doc => doc.data().namaStasiun as string);
+      setStasiunList(stasiunData);
+    };
+
+    fetchKeretaData();
+    fetchStasiunData();
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (addData.id_rute.trim() !== "" && addData.berangkat.trim() !== "" && addData.waktuBerangkat.trim() !== "" && addData.waktuTiba.trim() !== "" && addData.namaStasiunDestinasi.trim() !== "") {
+    if (addData.id_rute.trim() !== "" && addData.berangkat.trim() !== "" && addData.namaKereta.trim() !== "" && addData.waktuBerangkat.trim() !== "" && addData.waktuTiba.trim() !== "" && addData.namaStasiunDestinasi.trim() !== "") {
       try {
         // Cek apakah id_rute sudah ada di Firestore
         const q = query(collection(firestore, "dataRute"), where("id_rute", "==", addData.id_rute));
@@ -65,15 +100,37 @@ const AddRute = () => {
               />
             </div>
             <div className="mb-2">
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berangkat</label>
-              <input 
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kereta</label>
+              <select
+                value={addData.namaKereta}
+                onChange={(e) =>
+                  setAddData({ ...addData, namaKereta: e.target.value })
+                }
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="">Pilih Kereta</option>
+                {keretaList.map((kereta, index) => (
+                  <option key={index} value={kereta}>{kereta}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berangkat Dari Stasiun</label>
+              <select
                 value={addData.berangkat}
                 onChange={(e) =>
                   setAddData({ ...addData, berangkat: e.target.value })
                 }
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                required 
-              />
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="">Pilih Stasiun</option>
+                {stasiunList.map((stasiun, index) => (
+                  <option key={index} value={stasiun}>{stasiun}</option>
+                ))}
+              </select>
             </div>
             <div className="mb-2">
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Berangkat</label>
@@ -99,14 +156,19 @@ const AddRute = () => {
             </div>
             <div className="mb-2">
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Stasiun Destinasi</label>
-              <input 
+              <select
                 value={addData.namaStasiunDestinasi}
                 onChange={(e) =>
                   setAddData({ ...addData, namaStasiunDestinasi: e.target.value })
                 }
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                required 
-              />
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="">Pilih Stasiun</option>
+                {stasiunList.map((stasiun, index) => (
+                  <option key={index} value={stasiun}>{stasiun}</option>
+                ))}
+              </select>
             </div>
             <button 
               type="submit" 

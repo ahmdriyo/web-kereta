@@ -1,10 +1,15 @@
-'use client'
+'use client';
 import kereta from "../../asset/kereta.jpg";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { firestore } from "../../../firebaseConfig";
+type Station = {
+  id_stasiun: string;
+  namaStasiun: string;
+  nomerPlatform: string;
+};
 
 const AddKereta = () => {
   const router = useRouter();
@@ -14,6 +19,22 @@ const AddKereta = () => {
     kelas: "",
     destinasi: "",
   });
+  const [stations, setStations] = useState<Station[]>([]);
+
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const q = query(collection(firestore, "dataStasiun"));
+        const querySnapshot = await getDocs(q);
+        const stationList: Station[] = querySnapshot.docs.map(doc => doc.data() as Station);
+        setStations(stationList);
+      } catch (error) {
+        console.error("Error fetching stations: ", error);
+      }
+    };
+
+    fetchStations();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -86,14 +107,21 @@ const AddKereta = () => {
             </div>
             <div className="mb-2">
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Destinasi</label>
-              <input 
+              <select
                 value={addData.destinasi}
                 onChange={(e) =>
                   setAddData({ ...addData, destinasi: e.target.value })
                 }
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                required 
-              />
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="" disabled>Pilih Destinasi</option>
+                {stations.map((station) => (
+                  <option key={station.id_stasiun} value={station.namaStasiun}>
+                    {station.namaStasiun}
+                  </option>
+                ))}
+              </select>
             </div>
             <button 
               type="submit" 

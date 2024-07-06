@@ -8,7 +8,8 @@ import { useSession } from "next-auth/react";
 import Loading from "../../components/Loading";
 
 interface Route {
-  id: string; // Sesuaikan dengan tipe id yang digunakan di Firestore
+  id: string; 
+  namaKereta:string;
   berangkat: string;
   waktuBerangkat: string;
   waktuTiba: string;
@@ -65,7 +66,7 @@ const Rute = () => {
     >
       <div className="flex items-center justify-center h-full">
         <div className="max-w-4xl mx-auto mt-10">
-          <div className="bg-[#eedef8] bg-opacity-75 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md">
+          <div className="bg-[#eedef8] bg-opacity-75 m-2 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md">
             <h2 className="text-2xl mb-4 font-bold">Daftar Rute</h2>
             <div className="flex mb-4">
               <input
@@ -83,6 +84,7 @@ const Rute = () => {
               <thead>
                 <tr>
                   <th className="border p-2">No.</th>
+                  <th className="border p-2">Kereta</th>
                   <th className="border p-2">Berangkat</th>
                   <th className="border p-2">Waktu Berangkat</th>
                   <th className="border p-2">Waktu Tiba</th>
@@ -107,6 +109,9 @@ const Rute = () => {
                   <td>
                     <Loading />
                   </td>
+                  <td>
+                    <Loading />
+                  </td>
                 </tr>
               </tbody>
               ):(
@@ -114,6 +119,7 @@ const Rute = () => {
                 {filteredRoutes.map((route, index) => (
                   <tr key={route.id}>
                     <td className="border text-center">{index + 1}</td>
+                    <td className="border p-2">{route.namaKereta}</td>
                     <td className="border p-2">{route.berangkat}</td>
                     <td className="border p-2 text-center">
                       {route.waktuBerangkat}
