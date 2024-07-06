@@ -23,10 +23,7 @@ const Rute = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { data: session, status } = useSession({
-    required: true,
-      onUnauthenticated() {
-      redirect('/loginPenumpang');
-    },
+    required: false,
   });
   const handelAdd = () => {
     router.push("/rute/addRute");

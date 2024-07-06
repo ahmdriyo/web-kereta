@@ -25,10 +25,8 @@ const StasiunPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { data: session, status } = useSession({
-    required: true,
-      onUnauthenticated() {
-      redirect('/loginPenumpang');
-    },
+    required: false,
+
   });
   useEffect(() => {
     const fetchData = async () => {
