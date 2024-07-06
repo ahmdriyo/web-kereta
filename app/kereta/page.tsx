@@ -99,9 +99,9 @@ const Kereta = () => {
                 {filteredRoutes.map((route, index) => (
                   <tr key={route.id}>
                     <td className="border p-2 text-center">{index + 1}</td>
-                    <td className="border p-2">{route.namaKereta}</td>
+                    <td className="border p-2 text-center">{route.namaKereta}</td>
                     <td className="border p-2 text-center">{route.kelas}</td>
-                    <td className="border p-2">{route.destinasi}</td>
+                    <td className="border p-2 text-center">{route.destinasi}</td>
                     {session?.user?.email === 'admin@gmail.com' && (
                       <td className="border p-2 text-center">
                         <button

@@ -105,8 +105,8 @@ const Rute = () => {
                 {filteredRoutes.map((route, index) => (
                   <tr key={route.id}>
                     <td className="border text-center">{index + 1}</td>
-                    <td className="border p-2">{route.namaKereta}</td>
-                    <td className="border p-2">{route.berangkat}</td>
+                    <td className="border p-2 text-center">{route.namaKereta}</td>
+                    <td className="border p-2 text-center">{route.berangkat}</td>
                     <td className="border p-2 text-center">
                       {route.waktuBerangkat}
                     </td>
