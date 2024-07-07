@@ -83,7 +83,7 @@ const EditRute = ({ params }) => {
         <div className="bg-[#eedef8] bg-opacity-75 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md w-[500px]">
           <div
             className="flex flex-row items-center cursor-pointer mb-4"
-            onClick={() => router.push("/rute")}
+            onClick={() => router.push("/penumpang")}
           >
             <FaArrowLeftLong />
             <h1 className="font-bold ml-2">Kembali</h1>
