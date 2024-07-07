@@ -24,6 +24,10 @@ const links = [
     name: "Cari Rute",
     path: "/rute",
   },
+  {
+    name: "Info Penumpang",
+    path: "/penumpang",
+  },
 ];
 
 const MobileNav = () => {
