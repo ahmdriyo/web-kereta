@@ -76,10 +76,10 @@ const EditRute = ({ params }) => {
 
   return (
     <div
-      className="h-[90.5vh] w-screen-10 bg-cover bg-center"
+      className="h-[90.5vh] w-full bg-cover bg-center"
       style={{ backgroundImage: `url(${kereta.src})` }}
     >
-      <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-full mx-auto px-4 max-w-4xl w-full md:px-0">
         <div className="bg-[#eedef8] bg-opacity-75 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md w-[500px]">
           <div
             className="flex flex-row items-center cursor-pointer mb-4"
@@ -138,14 +138,14 @@ const EditRute = ({ params }) => {
             </div>
             <button
               type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Simpan
             </button>
             <button
               onClick={handleDelete}
               type="button"
-              className="text-white ml-3 bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+              className="text-white ml-3 bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
             >
               Hapus
             </button>

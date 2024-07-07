@@ -61,10 +61,10 @@ const AddKereta = () => {
 
   return (
     <div
-      className="h-[90.5vh] w-screen-10 bg-cover bg-center"
+      className="h-[90.5vh] w-full bg-cover bg-center"
       style={{ backgroundImage: `url(${kereta.src})` }}
     >
-      <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-full mx-auto px-4 max-w-4xl w-full md:px-0">
         <div className="bg-[#eedef8] bg-opacity-75 backdrop-filter backdrop-blur-sm p-6 rounded shadow-md w-[500px]">
           <div className="flex flex-row items-center cursor-pointer" onClick={() => router.push('/kereta')}>
             <FaArrowLeftLong/>
