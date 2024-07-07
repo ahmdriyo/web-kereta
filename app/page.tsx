@@ -22,11 +22,6 @@ export default function Home(){
     >
       <div className="flex items-center justify-center h-full xl:w-[65%] p-10">
         <div className="text-start text-white">
-        {/* <div className='text-white'>{user?.nama }</div>
-        <div className='text-white'>{user?.email }</div>
-        <div className='text-white'>{user?.alamat }</div>
-        <div className='text-white'>{user?.noTelpon }</div>
-        <button className='text-white' onClick={() => signOut()}>Logout</button> */}
           <p className="xl:text-[30px] font-bold xl:mb-[30px] mb-2 text-[20px]">
             Selamat datang di platform kami yang menyediakan informasi lengkap
             mengenai rute perjalanan, stasiun, dan kereta api cepat.
@@ -40,8 +35,10 @@ export default function Home(){
           </p>
           <p>NOTE*</p>
           <p className="text-sm font-light text-[#ffffff]">
-            Silahkan login sebagai Penumpang atau admin terlebih dahulu untuk akses web secara penuh!
+            Silahkan login sebagai admin terlebih dahulu untuk akses(CRUD) secara penuh!
           </p>
+          <a className="text-sm text-[#ffffff] font-extralight">Email : admin@gmail.com</a>
+          <p className="text-sm font-light text-[#ffffff]">Password : rahasia</p>
         </div>
       </div>
     </div>

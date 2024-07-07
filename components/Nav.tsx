@@ -24,6 +24,10 @@ const links = [
     name: "Cari Rute",
     path: "/rute",
   },
+  {
+    name: "Info Penumpang",
+    path: "/penumpang",
+  },
 ];
 const Nav = () => {
   const { data: session, status } = useSession({
@@ -97,18 +101,7 @@ const Nav = () => {
                   Login Admin
                 </div>
               </Link>
-              <Link
-                href="/loginPenumpang"
-                className="flex flex-row items-center px-2 py-2 w-[174px] text-white rounded hover:bg-[#242222]"
-              >
-                <div
-                  onClick={handleItemClick}
-                  className="flex flex-row items-center"
-                >
-                  <FaUser className=" mr-2" />
-                  Login Penumpang
-                </div>
-              </Link>
+
             </div>
           )}
         </div>
